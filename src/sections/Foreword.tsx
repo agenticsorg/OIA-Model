@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { foreword } from '../content/digest';
+import { EraTimeline } from '../components/viz/EraTimeline';
 
 /**
  * Accent "Voice Exception" chip flags this as the one place the
@@ -29,7 +30,11 @@ export function Foreword() {
               {foreword.role}
             </span>
           </div>
-          <Prose paragraphs={foreword.paragraphs} className="max-w-3xl" />
+          <Prose paragraphs={foreword.paragraphs.slice(0, 3)} className="max-w-3xl" />
+          <EraTimeline />
+          <div className="mt-6">
+            <Prose paragraphs={foreword.paragraphs.slice(3)} className="max-w-3xl" />
+          </div>
           <div className="mt-8 pt-6 border-t border-white/10 flex flex-col gap-1">
             {foreword.signOff.map((line) => (
               <span key={line} className="text-sm text-white/85">

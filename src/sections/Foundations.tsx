@@ -3,6 +3,8 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { foundations } from '../content/digest';
+import { LineageConstellation } from '../components/viz/LineageConstellation';
+import { ContextTimeline } from '../components/viz/ContextTimeline';
 
 export function Foundations() {
   return (
@@ -18,11 +20,13 @@ export function Foundations() {
               </Chip>
             ))}
           </div>
+          <LineageConstellation />
         </CmdPanel>
 
         {/* §2.2 Contemporary Context */}
         <CmdPanel id="foundations-context" eyebrow="Section 2.2" title={foundations.context.heading}>
           <Prose paragraphs={[foundations.context.body]} className="max-w-3xl" />
+          <ContextTimeline />
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {foundations.context.developments.map((d, i) => (
               <div

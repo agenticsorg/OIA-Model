@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { introduction } from '../content/digest';
+import { PropertyMap } from '../components/viz/PropertyMap';
 
 export function Introduction() {
   return (
@@ -32,6 +33,7 @@ export function Introduction() {
               </div>
             ))}
           </div>
+          <PropertyMap />
         </CmdPanel>
       </div>
     </TelemetryRegion>

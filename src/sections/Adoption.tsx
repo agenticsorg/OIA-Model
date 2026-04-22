@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { adoption } from '../content/digest';
+import { ScaleRings } from '../components/viz/ScaleRings';
 
 export function Adoption() {
   return (
@@ -14,6 +15,7 @@ export function Adoption() {
           trailing={<Chip tone="accent">Three Scales</Chip>}
         >
           <Prose paragraphs={adoption.paragraphs.slice(0, 1)} className="max-w-3xl" />
+          <ScaleRings />
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             {adoption.scales.map((s, i) => (
