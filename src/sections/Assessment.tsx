@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { TelemetryRegion } from '../components/TelemetryRegion';
 import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
-import { layersTopDown } from '../content/layers';
+import { layers } from '../content/layers';
 import { spans } from '../content/spans';
 import { useLocalStorage, LS_KEYS } from '../hooks/useLocalStorage';
 
@@ -21,7 +21,7 @@ export function Assessment() {
 
   const totals = useMemo(() => {
     const t = { coherent: 0, gap: 0, notyet: 0, na: 0, unrated: 0 };
-    for (const l of layersTopDown) {
+    for (const l of layers) {
       const s = state[l.id];
       if (!s) t.unrated += 1;
       else t[s] += 1;
@@ -35,7 +35,7 @@ export function Assessment() {
   const spanReadiness = useMemo(() => {
     return spans.map((s) => {
       const relevant = s.layerRange.map((n) => {
-        const l = layersTopDown.find((x) => x.number === n);
+        const l = layers.find((x) => x.number === n);
         return l ? state[l.id] : undefined;
       });
       const total = relevant.length;
@@ -114,7 +114,7 @@ export function Assessment() {
                 Status
               </span>
             </div>
-            {layersTopDown.map((l) => {
+            {layers.map((l) => {
               const current = state[l.id];
               const isStateHolding = l.number === 3 || l.number === 8;
               return (

@@ -4,9 +4,13 @@ import { layers } from '../content/layers';
 /**
  * Left-edge vertical rail. At xl width (w-52) the layer name is shown
  * in full, wrapping to two lines as needed — no truncation.
+ *
+ * Ordering matches §4 of the source digest: Layer 0 at top, Layer 9
+ * at bottom, so rail order tracks scroll order through the Layer
+ * Definitions section.
  */
 export function LayerRail() {
-  const layerIds = [...layers].reverse().map((l) => l.id);
+  const layerIds = layers.map((l) => l.id);
   const active = useActiveSection(layerIds);
 
   return (
@@ -17,7 +21,7 @@ export function LayerRail() {
       <div className="text-[0.625rem] font-mono text-white/35 tracking-[0.18em] uppercase px-2 pb-2 border-b border-white/5">
         Layers
       </div>
-      {[...layers].reverse().map((l) => {
+      {layers.map((l) => {
         const isActive = active === l.id;
         return (
           <a

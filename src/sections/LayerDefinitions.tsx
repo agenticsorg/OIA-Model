@@ -3,7 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { LayerMiniWidget } from '../components/LayerMiniWidget';
-import { layersTopDown } from '../content/layers';
+import { layers } from '../content/layers';
 import type { Layer } from '../content/types';
 
 function LayerPanel({ layer }: { layer: Layer }) {
@@ -127,7 +127,7 @@ export function LayerDefinitions() {
           <Chip tone="accent">10 panels · L0 → L9</Chip>
         </header>
         <div className="flex flex-col gap-6">
-          {layersTopDown.map((l) => (
+          {layers.map((l) => (
             <LayerPanel key={l.id} layer={l} />
           ))}
         </div>

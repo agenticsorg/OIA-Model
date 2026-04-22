@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { TelemetryRegion } from '../components/TelemetryRegion';
 import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
-import { layers, layersTopDown } from '../content/layers';
+import { layers } from '../content/layers';
 import { refTechs } from '../content/ref-techs';
 
 type Mode = 'concerns' | 'tech' | 'questions';
@@ -133,7 +133,7 @@ export function Explorer() {
               <LayerFilterPill active={layerFilter === null} onClick={() => setLayerFilter(null)}>
                 All
               </LayerFilterPill>
-              {layersTopDown.map((l) => (
+              {layers.map((l) => (
                 <LayerFilterPill
                   key={l.id}
                   active={layerFilter === l.number}
