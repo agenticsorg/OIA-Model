@@ -17,7 +17,7 @@ export function ScaleRings() {
       </figcaption>
 
       <div className="bg-black rounded-xl border border-white/10 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-6 overflow-hidden">
-        <svg viewBox="0 0 100 60" className="w-full h-[280px] block" role="img" aria-label="Three scales of adoption">
+        <svg viewBox="0 0 100 60" className="w-full h-[200px] sm:h-[280px] block" role="img" aria-label="Three scales of adoption">
           {/* outer ring: industry */}
           <circle cx={30} cy={30} r={28} fill="none" stroke="rgba(255,255,255,0.18)" strokeWidth={0.4} strokeDasharray="1 0.6" />
           <text x={30} y={5} textAnchor="middle" fontSize={2.2} fill="rgba(255,255,255,0.75)" fontFamily="ui-monospace, Menlo, monospace" letterSpacing="0.18em">

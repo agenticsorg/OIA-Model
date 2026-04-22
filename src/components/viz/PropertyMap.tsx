@@ -54,7 +54,7 @@ export function PropertyMap() {
         </span>
       </figcaption>
       <div className="bg-black rounded-xl border border-white/10 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-4 overflow-hidden">
-        <svg viewBox="0 0 100 96" className="w-full h-[440px] block" role="img" aria-label="Property to layer mapping">
+        <svg viewBox="0 0 100 96" className="w-full h-[300px] sm:h-[440px] block" role="img" aria-label="Property to layer mapping">
           {/* layer ladder on the right */}
           {LAYER_ANCHORS.map((a, i) => {
             const stateHolding = a.label.includes('★');

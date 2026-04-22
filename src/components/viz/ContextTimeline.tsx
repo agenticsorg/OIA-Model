@@ -51,7 +51,7 @@ export function ContextTimeline() {
           </div>
 
           {/* event pins */}
-          <div className="relative mt-6 h-[280px]">
+          <div className="relative mt-6 h-[360px] sm:h-[280px]">
             {EVENTS.map((e, i) => (
               <div
                 key={i}

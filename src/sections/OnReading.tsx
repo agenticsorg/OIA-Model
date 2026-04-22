@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { onReading } from '../content/digest';
+import { ReadingPlanGenerator } from '../components/micro/ReadingPlanGenerator';
 
 export function OnReading() {
   return (
@@ -14,6 +15,7 @@ export function OnReading() {
           trailing={<Chip tone="mono">40 min read</Chip>}
         >
           <Prose paragraphs={onReading.paragraphs} className="max-w-3xl" />
+          <ReadingPlanGenerator />
         </CmdPanel>
       </div>
     </TelemetryRegion>

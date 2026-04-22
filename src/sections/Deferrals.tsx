@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { deferrals } from '../content/digest';
+import { CommunityInput } from '../components/micro/CommunityInput';
 
 export function Deferrals() {
   return (
@@ -37,6 +38,7 @@ export function Deferrals() {
               </article>
             ))}
           </div>
+          <CommunityInput />
         </CmdPanel>
       </div>
     </TelemetryRegion>

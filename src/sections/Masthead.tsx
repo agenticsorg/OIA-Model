@@ -7,7 +7,7 @@ import { masthead } from '../content/digest';
 export function Masthead() {
   return (
     <TelemetryRegion id="masthead" className="">
-      <div className="main-inset pt-12 pb-8">
+      <div className="main-inset pt-8 sm:pt-12 pb-6 sm:pb-8">
         <CmdPanel
           eyebrow={masthead.publisher}
           trailing={
@@ -17,7 +17,7 @@ export function Masthead() {
           }
           bodyClassName="p-0"
         >
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-8 md:gap-10 px-6 sm:px-10 py-10 md:py-14 relative overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-6 md:gap-10 px-5 sm:px-10 py-8 sm:py-10 md:py-14 relative overflow-hidden">
             <div
               className="absolute inset-0 grid-lines opacity-60 pointer-events-none"
               aria-hidden="true"
@@ -40,10 +40,10 @@ export function Masthead() {
                   </span>
                 </div>
               </div>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.02] display-font">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white leading-[1.02] display-font">
                 {masthead.title}
               </h1>
-              <p className="mt-3 text-2xl sm:text-3xl font-normal text-white/85">
+              <p className="mt-3 text-xl sm:text-2xl md:text-3xl font-normal text-white/85">
                 {masthead.subtitle}
               </p>
               <p className="mt-2 text-sm sm:text-base text-white/55 max-w-xl">
@@ -58,19 +58,20 @@ export function Masthead() {
 
               <div className="mt-6 flex flex-wrap items-center gap-2">
                 <a
-                  href="#stack-diagram"
+                  href="#workspace"
                   className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#f05122] hover:bg-[#ff7a4a] text-white text-sm font-normal rounded transition-colors shadow-[0_0_20px_rgba(240,81,34,0.4)]"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                    <path d="M3 6h18M3 12h18M3 18h18" />
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18M9 21V9" />
                   </svg>
-                  Open the Stack Diagram
+                  Open your Workspace
                 </a>
                 <a
-                  href="#implementation"
+                  href="#stack-diagram"
                   className="inline-flex items-center gap-2 px-3.5 py-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-white/85 text-sm font-normal rounded transition-colors"
                 >
-                  Build my roadmap →
+                  Stack Diagram →
                 </a>
                 <a
                   href="#assessment"
@@ -81,7 +82,8 @@ export function Masthead() {
               </div>
             </div>
             <div className="flex-shrink-0 justify-self-center md:justify-self-end relative z-10">
-              <RadarRing size={200} />
+              <div className="hidden md:block"><RadarRing size={200} /></div>
+              <div className="md:hidden"><RadarRing size={140} /></div>
             </div>
           </div>
 

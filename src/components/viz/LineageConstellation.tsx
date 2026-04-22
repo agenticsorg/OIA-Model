@@ -40,7 +40,7 @@ export function LineageConstellation() {
         </span>
       </figcaption>
       <div className="bg-black rounded-xl border border-white/10 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-4 overflow-hidden">
-        <svg viewBox="0 0 100 100" className="w-full h-[440px] block" role="img" aria-label="Lineage constellation">
+        <svg viewBox="0 0 100 100" className="w-full h-[300px] sm:h-[440px] block" role="img" aria-label="Lineage constellation">
           {/* orbital rings */}
           <circle cx={cx} cy={cy} r={r1} fill="none" stroke="rgba(240,81,34,0.25)" strokeDasharray="1 1" strokeWidth={0.25} />
           <circle cx={cx} cy={cy} r={r2} fill="none" stroke="rgba(255,255,255,0.08)" strokeDasharray="1 1" strokeWidth={0.2} />

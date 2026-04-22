@@ -4,6 +4,7 @@ import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { spans, spansIntro, spansIntersections } from '../content/spans';
 import type { Span } from '../content/types';
+import { SpanGapMemo } from '../components/micro/SpanGapMemo';
 
 function SpanLaneVisual({ span }: { span: Span }) {
   /* Show a signal-texture + sweep-block lane overlaid on a 10-cell
@@ -113,6 +114,7 @@ export function CrossLayerSpans() {
           trailing={<Chip tone="accent">Closing</Chip>}
         >
           <Prose paragraphs={[spansIntersections]} className="max-w-3xl" />
+          <SpanGapMemo />
         </CmdPanel>
       </div>
     </TelemetryRegion>

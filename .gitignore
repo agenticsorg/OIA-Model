@@ -20,6 +20,9 @@ dist/
 *.log
 npm-debug.log*
 
+# runtime data
+data/
+
 # Claude Code / agentics local state
 .claude/
 .claude-flow/

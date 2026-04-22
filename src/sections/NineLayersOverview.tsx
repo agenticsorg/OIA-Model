@@ -3,6 +3,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { nineLayersOverview } from '../content/digest';
+import { LayerScopeMemo } from '../components/micro/LayerScopeMemo';
 
 export function NineLayersOverview() {
   return (
@@ -75,6 +76,7 @@ export function NineLayersOverview() {
           <div className="mt-6">
             <Prose paragraphs={nineLayersOverview.relational} className="max-w-3xl" />
           </div>
+          <LayerScopeMemo />
         </CmdPanel>
       </div>
     </TelemetryRegion>

@@ -12,6 +12,7 @@ import {
   decisionCategoryRoman,
 } from '../content/decision-log';
 import type { Decision } from '../content/types';
+import { ReviewerBrief } from '../components/micro/ReviewerBrief';
 
 type Vote = 'reopen' | 'hold' | 'confirm';
 type Votes = Partial<Record<string, Vote>>;
@@ -158,6 +159,7 @@ export function DecisionLog() {
             </div>
             <Prose paragraphs={decisionLogPurpose.paragraphs} className="max-w-3xl" />
           </div>
+          <ReviewerBrief />
         </CmdPanel>
 
         {/* Review Register — voting summary */}
@@ -229,7 +231,7 @@ export function DecisionLog() {
           }
           bodyClassName="p-0"
         >
-          <div className="grid grid-cols-[auto_auto_1fr_auto_auto] gap-4 px-4 py-3 border-b border-white/10 bg-white/[0.02]">
+          <div className="hidden md:grid grid-cols-[auto_auto_1fr_auto_auto] gap-4 px-4 py-3 border-b border-white/10 bg-white/[0.02]">
             <span className="text-[0.625rem] text-white/35 font-mono tracking-[0.18em] uppercase w-4">
               Chk
             </span>
@@ -329,71 +331,79 @@ function DecisionRow({
   return (
     <article
       id={d.id}
-      className={`grid grid-cols-[auto_auto_1fr_auto_auto] gap-4 items-center px-4 py-3 border-b border-white/5 transition-colors ${
+      className={`border-b border-white/5 transition-colors ${
         selected ? 'bg-[#f05122]/[0.06]' : 'hover:bg-white/[0.03]'
       }`}
     >
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-pressed={selected}
-        aria-label={`Select decision ${d.number}`}
-        className={`w-4 h-4 rounded border flex items-center justify-center shadow-inner ${
-          selected
-            ? 'bg-[#f05122] border-[#f05122] shadow-[0_0_8px_rgba(240,81,34,0.5)]'
-            : 'bg-black border-white/15 hover:border-white/40'
-        }`}
-      >
-        {selected && (
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-white">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        )}
-      </button>
-      <span className="text-xs text-white/65 font-mono tracking-wider">DEC-{d.number}</span>
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={expanded}
-        className="text-sm text-white/90 text-left hover:text-white"
-      >
-        {d.title}
-      </button>
+      <div className="grid grid-cols-[auto_auto_1fr] md:grid-cols-[auto_auto_1fr_auto_auto] gap-3 md:gap-4 items-center px-4 py-3">
+        <button
+          type="button"
+          onClick={onSelect}
+          aria-pressed={selected}
+          aria-label={`Select decision ${d.number}`}
+          className={`w-4 h-4 rounded border flex items-center justify-center shadow-inner ${
+            selected
+              ? 'bg-[#f05122] border-[#f05122] shadow-[0_0_8px_rgba(240,81,34,0.5)]'
+              : 'bg-black border-white/15 hover:border-white/40'
+          }`}
+        >
+          {selected && (
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-white">
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+          )}
+        </button>
+        <span className="text-xs text-white/65 font-mono tracking-wider">DEC-{d.number}</span>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          className="text-sm text-white/90 text-left hover:text-white"
+        >
+          {d.title}
+        </button>
 
-      <div className="flex gap-1 flex-shrink-0 justify-end">
-        {(['reopen', 'hold', 'confirm'] as Vote[]).map((v) => {
-          const active = vote === v;
-          return (
-            <button
-              key={v}
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onVote(v);
-              }}
-              aria-pressed={active}
-              title={VOTE_META[v].label}
-              className={`min-w-[2.25rem] px-1.5 py-1 rounded border text-[0.625rem] font-mono tracking-[0.14em] uppercase transition-all ${
-                active
-                  ? v === 'reopen'
-                    ? 'bg-[#f05122] border-[#f05122] text-white shadow-[0_0_8px_rgba(240,81,34,0.45)]'
-                    : v === 'hold'
-                      ? 'bg-white/10 border-white/40 text-white'
-                      : 'bg-white/5 border-white/30 text-[#ff8a5c]'
-                  : 'border-white/10 text-white/35 hover:border-white/40 hover:text-white/80'
-              }`}
-            >
-              {VOTE_META[v].short}
-            </button>
-          );
-        })}
+        {/* Vote pills — on mobile, wrap to second row spanning all three columns */}
+        <div className="col-span-3 md:col-auto flex items-center justify-between md:justify-end gap-2 pl-7 md:pl-0">
+          <span className="md:hidden text-[0.625rem] text-white/35 font-mono tracking-[0.18em] uppercase">
+            {d.category}
+          </span>
+          <div className="flex gap-1 flex-shrink-0 justify-end">
+            {(['reopen', 'hold', 'confirm'] as Vote[]).map((v) => {
+              const active = vote === v;
+              return (
+                <button
+                  key={v}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onVote(v);
+                  }}
+                  aria-pressed={active}
+                  title={VOTE_META[v].label}
+                  className={`min-w-[2.25rem] px-1.5 py-1 rounded border text-[0.625rem] font-mono tracking-[0.14em] uppercase transition-all ${
+                    active
+                      ? v === 'reopen'
+                        ? 'bg-[#f05122] border-[#f05122] text-white shadow-[0_0_8px_rgba(240,81,34,0.45)]'
+                        : v === 'hold'
+                          ? 'bg-white/10 border-white/40 text-white'
+                          : 'bg-white/5 border-white/30 text-[#ff8a5c]'
+                      : 'border-white/10 text-white/35 hover:border-white/40 hover:text-white/80'
+                  }`}
+                >
+                  {VOTE_META[v].short}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <span className="hidden md:block text-[0.6875rem] text-white/45 font-mono tracking-[0.14em] uppercase">
+          {d.category}
+        </span>
       </div>
-
-      <span className="text-[0.6875rem] text-white/45 font-mono tracking-[0.14em] uppercase">
-        {d.category}
-      </span>
       {expanded && (
-        <div className="col-span-5 mt-3 mb-2 px-4 py-4 bg-black border border-white/10 rounded-lg">
+        <div className="mx-4 mb-4 px-4 py-4 bg-black border border-white/10 rounded-lg">
           <Prose paragraphs={[d.rationale]} />
           {d.revisitTrigger && (
             <div className="mt-4 px-3 py-2 rounded border border-[#f05122]/40 bg-[#f05122]/10">

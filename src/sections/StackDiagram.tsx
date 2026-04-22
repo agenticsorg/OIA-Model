@@ -69,6 +69,8 @@ export function StackDiagram() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
           <CmdPanel bodyClassName="p-0">
+            <div className="overflow-x-auto">
+              <div className="min-w-[620px]">
             <div className="flex border-b border-white/10 bg-white/[0.02]">
               <div className="px-4 py-3 flex-1 text-[0.625rem] font-mono text-white/35 tracking-[0.18em] uppercase">
                 Layer
@@ -199,6 +201,8 @@ export function StackDiagram() {
                   </div>
                 );
               })}
+            </div>
+              </div>
             </div>
 
             <footer className="px-4 py-3 border-t border-white/10 bg-white/[0.02] flex flex-wrap items-center gap-4 text-[0.6875rem] font-mono text-white/45 tracking-[0.14em] uppercase">

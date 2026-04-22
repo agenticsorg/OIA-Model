@@ -4,6 +4,7 @@ import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { adoption } from '../content/digest';
 import { ScaleRings } from '../components/viz/ScaleRings';
+import { AdoptionPlaybook } from '../components/micro/AdoptionPlaybook';
 
 export function Adoption() {
   return (
@@ -38,6 +39,7 @@ export function Adoption() {
           <div className="mt-6">
             <Prose paragraphs={adoption.paragraphs.slice(1)} className="max-w-3xl" />
           </div>
+          <AdoptionPlaybook />
         </CmdPanel>
       </div>
     </TelemetryRegion>

@@ -22,6 +22,7 @@ export function CommandPalette({ open, onClose }: Props) {
     () => [
       { id: 'masthead', label: 'Masthead', hint: 'Top of page' },
       { id: 'hero-dashboard', label: 'Live Telemetry Dashboard', hint: 'Hero' },
+      { id: 'workspace', label: 'Workspace — unified deliverable', hint: 'Single export' },
       { id: 'stack-diagram', label: 'Stack Diagram — layer × span canvas', hint: 'Implementation tool' },
       { id: 'assessment', label: 'Architecture Assessment — rate your stack', hint: 'Implementation tool' },
       { id: 'provider-footprint', label: 'Provider Footprint — vendor × layer matrix', hint: 'Implementation tool' },
@@ -43,6 +44,7 @@ export function CommandPalette({ open, onClose }: Props) {
       { id: 'decision-log', label: 'Decision Log Digest', hint: '11 decisions' },
       ...decisions.map((d) => ({ id: d.id, label: `Decision ${d.number} — ${d.title}`, hint: d.category })),
       { id: 'using-this-log', label: 'On Using This Log', hint: 'Decision Log close' },
+      { id: 'feedback', label: 'Feedback — submit to the Foundation', hint: 'SQLite · 16 questions' },
       { id: 'colophon', label: 'Colophon', hint: 'Bottom of page' },
     ],
     [],

@@ -8,6 +8,7 @@ import {
   relationshipsComposition,
   practicalCompositionChips,
 } from '../content/relationships';
+import { StackSpec } from '../components/micro/StackSpec';
 
 export function RelationshipToOthers() {
   return (
@@ -54,6 +55,7 @@ export function RelationshipToOthers() {
               </span>
             ))}
           </div>
+          <StackSpec />
         </CmdPanel>
       </div>
     </TelemetryRegion>

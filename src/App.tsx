@@ -5,6 +5,7 @@ import { SpanRail } from './components/SpanRail';
 import { CommandPalette } from './components/CommandPalette';
 import { Masthead } from './sections/Masthead';
 import { HeroDashboard } from './sections/HeroDashboard';
+import { Workspace } from './sections/Workspace';
 import { Assessment } from './sections/Assessment';
 import { StackDiagram } from './sections/StackDiagram';
 import { ProviderFootprint } from './sections/ProviderFootprint';
@@ -23,6 +24,7 @@ import { Deferrals } from './sections/Deferrals';
 import { Closing } from './sections/Closing';
 import { DecisionLog } from './sections/DecisionLog';
 import { UsingThisLog } from './sections/UsingThisLog';
+import { Feedback } from './sections/Feedback';
 import { Colophon } from './sections/Colophon';
 
 export default function App() {
@@ -58,6 +60,7 @@ export default function App() {
         <main>
           <Masthead />
           <HeroDashboard />
+          <Workspace />
           <StackDiagram />
           <Assessment />
           <ProviderFootprint />
@@ -76,6 +79,7 @@ export default function App() {
           <Closing />
           <DecisionLog />
           <UsingThisLog />
+          <Feedback />
           <Colophon />
         </main>
         <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />

@@ -7,7 +7,7 @@ export function SpanRail() {
   return (
     <aside
       aria-label="Cross-layer span navigation"
-      className="hidden lg:flex fixed right-3 top-1/2 -translate-y-1/2 z-40 flex-col gap-1 w-14"
+      className="hidden lg:flex fixed right-3 top-28 z-40 flex-col gap-1 w-14 max-h-[calc(100vh-8rem)] overflow-y-auto pl-1"
     >
       <div className="text-[0.625rem] font-mono text-white/35 tracking-[0.18em] uppercase px-2 pb-2 border-b border-white/5 text-right">
         Spans

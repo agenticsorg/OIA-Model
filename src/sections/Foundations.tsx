@@ -5,6 +5,9 @@ import { Prose } from '../components/Prose';
 import { foundations } from '../content/digest';
 import { LineageConstellation } from '../components/viz/LineageConstellation';
 import { ContextTimeline } from '../components/viz/ContextTimeline';
+import { GovernanceOverlay } from '../components/micro/GovernanceOverlay';
+import { UrgencyBrief } from '../components/micro/UrgencyBrief';
+import { LayerPriorityPlan } from '../components/micro/LayerPriorityPlan';
 
 export function Foundations() {
   return (
@@ -21,6 +24,7 @@ export function Foundations() {
             ))}
           </div>
           <LineageConstellation />
+          <GovernanceOverlay />
         </CmdPanel>
 
         {/* §2.2 Contemporary Context */}
@@ -50,6 +54,7 @@ export function Foundations() {
               </div>
             ))}
           </div>
+          <UrgencyBrief />
         </CmdPanel>
 
         {/* §2.3 Defining Properties */}
@@ -83,6 +88,7 @@ export function Foundations() {
               </div>
             ))}
           </div>
+          <LayerPriorityPlan />
         </CmdPanel>
       </div>
     </TelemetryRegion>

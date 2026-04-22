@@ -7,10 +7,11 @@ import { layers } from '../content/layers';
  *
  * Ordering matches §4 of the source digest: Layer 0 at top, Layer 9
  * at bottom, so rail order tracks scroll order through the Layer
- * Definitions section.
+ * Definitions section. A Feedback tab sits below L9 for reviewer
+ * submissions to the Agentics Foundation.
  */
 export function LayerRail() {
-  const layerIds = layers.map((l) => l.id);
+  const layerIds = [...layers.map((l) => l.id), 'feedback'];
   const active = useActiveSection(layerIds);
 
   return (
@@ -18,6 +19,27 @@ export function LayerRail() {
       aria-label="Layer navigation"
       className="hidden lg:flex fixed left-3 top-28 z-40 flex-col gap-1 w-16 xl:w-52 max-h-[calc(100vh-8rem)] overflow-y-auto pr-1"
     >
+      {/* Feedback tab — pinned above the layers */}
+      <a
+        href="#feedback"
+        title="Submit feedback to the Agentics Foundation"
+        className={`group flex items-start gap-2 px-2 py-2 rounded-md border text-[0.6875rem] font-mono tracking-[0.08em] transition-all mb-2 ${
+          active === 'feedback'
+            ? 'border-[#f05122] bg-[#f05122]/20 text-white shadow-[0_0_12px_rgba(240,81,34,0.45)]'
+            : 'border-[#f05122]/45 bg-[#f05122]/5 text-[#ff8a5c] hover:bg-[#f05122]/15 hover:border-[#f05122]/80'
+        }`}
+      >
+        <span
+          className="w-1.5 h-1.5 rounded-full flex-shrink-0 mt-[0.4rem] bg-[#f05122] pulse-accent"
+          aria-hidden="true"
+        />
+        <span className="w-5 flex-shrink-0 pt-[2px]">FBK</span>
+        <span className="hidden xl:block text-[0.6875rem] leading-[1.15] break-words whitespace-normal">
+          Feedback
+          <span className="block text-white/45 group-hover:text-white/70">Foundation channel</span>
+        </span>
+      </a>
+
       <div className="text-[0.625rem] font-mono text-white/35 tracking-[0.18em] uppercase px-2 pb-2 border-b border-white/5">
         Layers
       </div>

@@ -83,6 +83,8 @@ export function ProviderFootprint() {
             </div>
           </div>
 
+          <div className="overflow-x-auto">
+            <div className="min-w-[760px]">
           {/* column headers */}
           <div className="grid grid-cols-[220px_1fr_auto] gap-4 px-4 py-3 border-b border-white/10 bg-white/[0.02]">
             <span className="text-[0.625rem] text-white/35 font-mono tracking-[0.18em] uppercase">
@@ -181,6 +183,8 @@ export function ProviderFootprint() {
             <span className="text-[0.625rem] font-mono text-white/45 tracking-[0.18em] uppercase w-16 text-right self-center">
               Count
             </span>
+          </div>
+            </div>
           </div>
         </CmdPanel>
 

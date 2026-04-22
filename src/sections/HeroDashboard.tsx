@@ -62,7 +62,7 @@ export function HeroDashboard() {
 
 function ZoneAlphaTile() {
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-1">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-1">
       <header className="cmd-panel-header">
         <div className="flex flex-col gap-1">
           <span className="text-[0.625rem] text-[#ff8a5c] font-mono uppercase tracking-[0.18em]">
@@ -105,7 +105,7 @@ function ZoneAlphaTile() {
 
 function ThermalCoreTile() {
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-1">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-1">
       <header className="cmd-panel-header">
         <span className="text-[0.625rem] text-white/50 font-mono uppercase tracking-[0.18em]">
           Thermal Core
@@ -183,7 +183,7 @@ function SystemLogsTile() {
     },
   ];
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-2">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-2">
       <header className="cmd-panel-header">
         <span className="text-base font-normal text-white">System Logs</span>
         <div className="flex items-center gap-1 bg-black p-1 rounded-lg border border-white/10 shadow-inner">
@@ -309,7 +309,7 @@ function SystemLogsTile() {
 
 function DeploymentTasksTile() {
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-1">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-1">
       <header className="cmd-panel-header">
         <span className="text-base font-normal text-white">Community Review</span>
         <span className="text-[0.625rem] text-white/30 font-mono uppercase tracking-[0.18em]">
@@ -386,7 +386,7 @@ function DeploymentTasksTile() {
 
 function ComputeUsageTile() {
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-1">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-1">
       <header className="cmd-panel-header">
         <span className="text-base font-normal text-white">Deployment Topology</span>
         <span className="text-[0.625rem] text-white/30 font-mono uppercase tracking-[0.18em]">
@@ -461,7 +461,7 @@ function ComputeUsageTile() {
 
 function QuantumRelayTile() {
   return (
-    <article className="cmd-panel h-[300px] lg:col-span-2">
+    <article className="cmd-panel min-h-[280px] md:h-[300px] lg:col-span-2">
       <header className="cmd-panel-header">
         <div className="flex items-center gap-3">
           <span

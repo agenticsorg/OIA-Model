@@ -4,6 +4,7 @@ import { Chip } from '../components/Chip';
 import { Prose } from '../components/Prose';
 import { introduction } from '../content/digest';
 import { PropertyMap } from '../components/viz/PropertyMap';
+import { SystemScopeGenerator } from '../components/micro/SystemScopeGenerator';
 
 export function Introduction() {
   return (
@@ -34,6 +35,7 @@ export function Introduction() {
             ))}
           </div>
           <PropertyMap />
+          <SystemScopeGenerator />
         </CmdPanel>
       </div>
     </TelemetryRegion>
