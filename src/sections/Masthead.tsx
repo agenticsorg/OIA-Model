@@ -23,17 +23,22 @@ export function Masthead() {
               aria-hidden="true"
             />
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-5">
+              <div className="flex items-center gap-4 mb-5">
                 <img
                   src="/logo.png"
                   alt="Agentics Foundation"
-                  className="h-10 w-auto select-none"
+                  className="h-14 w-14 select-none drop-shadow-[0_0_16px_rgba(240,81,34,0.35)]"
                   draggable={false}
                 />
-                <span className="inline-flex items-center gap-1.5 text-[0.625rem] font-mono text-[#ff8a5c] tracking-[0.22em] uppercase">
-                  <span className="w-2 h-2 bg-[#f05122]" aria-hidden="true" />
-                  Reference Architecture · 2026
-                </span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-mono text-white tracking-[0.22em] uppercase">
+                    Agentics Foundation
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-[0.625rem] font-mono text-[#ff8a5c] tracking-[0.22em] uppercase">
+                    <span className="w-2 h-2 bg-[#f05122]" aria-hidden="true" />
+                    Reference Architecture · 2026
+                  </span>
+                </div>
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-normal tracking-tight text-white leading-[1.02] display-font">
                 {masthead.title}

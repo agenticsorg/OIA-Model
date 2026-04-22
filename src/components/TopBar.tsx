@@ -36,11 +36,17 @@ export function TopBar({ onOpenPalette }: { onOpenPalette: () => void }) {
           <img
             src="/logo.png"
             alt="Agentics Foundation"
-            className="h-6 w-auto flex-shrink-0 select-none"
+            className="h-7 w-7 flex-shrink-0 select-none"
             draggable={false}
           />
-          <span className="hidden sm:inline text-xs font-mono text-white/55 tracking-[0.18em] uppercase whitespace-nowrap">
-            OIA Model · v0.1
+          <span className="hidden sm:flex items-center gap-2 min-w-0">
+            <span className="text-xs font-mono text-white tracking-[0.18em] uppercase whitespace-nowrap">
+              Agentics Foundation
+            </span>
+            <span className="text-white/20">·</span>
+            <span className="text-xs font-mono text-white/55 tracking-[0.18em] uppercase whitespace-nowrap">
+              OIA Model v0.1
+            </span>
           </span>
         </a>
 
