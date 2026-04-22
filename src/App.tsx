@@ -6,6 +6,9 @@ import { CommandPalette } from './components/CommandPalette';
 import { Masthead } from './sections/Masthead';
 import { HeroDashboard } from './sections/HeroDashboard';
 import { Assessment } from './sections/Assessment';
+import { StackDiagram } from './sections/StackDiagram';
+import { ProviderFootprint } from './sections/ProviderFootprint';
+import { Implementation } from './sections/Implementation';
 import { Explorer } from './sections/Explorer';
 import { OnReading } from './sections/OnReading';
 import { Foreword } from './sections/Foreword';
@@ -55,7 +58,10 @@ export default function App() {
         <main>
           <Masthead />
           <HeroDashboard />
+          <StackDiagram />
           <Assessment />
+          <ProviderFootprint />
+          <Implementation />
           <Explorer />
           <OnReading />
           <Foreword />

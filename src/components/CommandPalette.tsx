@@ -22,6 +22,11 @@ export function CommandPalette({ open, onClose }: Props) {
     () => [
       { id: 'masthead', label: 'Masthead', hint: 'Top of page' },
       { id: 'hero-dashboard', label: 'Live Telemetry Dashboard', hint: 'Hero' },
+      { id: 'stack-diagram', label: 'Stack Diagram — layer × span canvas', hint: 'Implementation tool' },
+      { id: 'assessment', label: 'Architecture Assessment — rate your stack', hint: 'Implementation tool' },
+      { id: 'provider-footprint', label: 'Provider Footprint — vendor × layer matrix', hint: 'Implementation tool' },
+      { id: 'implementation', label: 'Implementation Roadmap — per-layer checklists', hint: 'Implementation tool' },
+      { id: 'explorer', label: 'Explorer — search concerns / tech / OQs', hint: 'Implementation tool' },
       { id: 'on-reading', label: 'On Reading This Digest', hint: 'Preface' },
       { id: 'foreword', label: 'Foreword by Reuven Cohen', hint: '§Foreword' },
       { id: 'introduction', label: 'Introduction', hint: '§1' },

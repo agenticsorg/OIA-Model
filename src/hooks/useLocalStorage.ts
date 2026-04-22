@@ -32,4 +32,5 @@ export const LS_KEYS = {
   assessment: 'oia:assessment:v1',
   votes: 'oia:decision-votes:v1',
   voteNotes: 'oia:decision-notes:v1',
+  implementation: 'oia:implementation:v1',
 } as const;

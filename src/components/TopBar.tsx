@@ -7,10 +7,12 @@ interface NavItem {
 
 const items: NavItem[] = [
   { id: 'masthead', label: 'Digest' },
+  { id: 'stack-diagram', label: 'Stack' },
   { id: 'assessment', label: 'Assess' },
+  { id: 'provider-footprint', label: 'Vendors' },
+  { id: 'implementation', label: 'Roadmap' },
   { id: 'explorer', label: 'Explorer' },
   { id: 'layer-definitions', label: 'Layers' },
-  { id: 'cross-layer-spans', label: 'Spans' },
   { id: 'decision-log', label: 'Decisions' },
 ];
 

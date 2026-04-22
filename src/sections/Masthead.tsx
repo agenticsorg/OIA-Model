@@ -58,25 +58,25 @@ export function Masthead() {
 
               <div className="mt-6 flex flex-wrap items-center gap-2">
                 <a
-                  href="#assessment"
+                  href="#stack-diagram"
                   className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#f05122] hover:bg-[#ff7a4a] text-white text-sm font-normal rounded transition-colors shadow-[0_0_20px_rgba(240,81,34,0.4)]"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
+                    <path d="M3 6h18M3 12h18M3 18h18" />
                   </svg>
-                  Assess your architecture
+                  Open the Stack Diagram
                 </a>
                 <a
-                  href="#decision-log"
+                  href="#implementation"
                   className="inline-flex items-center gap-2 px-3.5 py-2 bg-white/[0.04] hover:bg-white/[0.08] border border-white/15 text-white/85 text-sm font-normal rounded transition-colors"
                 >
-                  Review the decisions →
+                  Build my roadmap →
                 </a>
                 <a
-                  href="#explorer"
+                  href="#assessment"
                   className="inline-flex items-center gap-2 px-3.5 py-2 text-white/55 hover:text-white text-sm font-normal rounded transition-colors"
                 >
-                  Explore reference tech ↗
+                  Assess your stack ↗
                 </a>
               </div>
             </div>
