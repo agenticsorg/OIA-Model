@@ -63,7 +63,9 @@ body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  /* Lands anchor targets just under the sticky top bar (~56 px) with
+     a few pixels of breathing room — no previous-section bleed. */
+  scroll-padding-top: 68px;
 }
 
 /* telemetry panel width helpers — padding tuned to clear the fixed

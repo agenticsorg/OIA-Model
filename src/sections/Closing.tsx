@@ -6,7 +6,7 @@ import { closing } from '../content/digest';
 
 export function Closing() {
   return (
-    <TelemetryRegion id="closing" className="scroll-mt-24">
+    <TelemetryRegion id="closing" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Closing"

@@ -6,7 +6,7 @@ import { masthead } from '../content/digest';
 
 export function Masthead() {
   return (
-    <TelemetryRegion id="masthead" className="scroll-mt-24">
+    <TelemetryRegion id="masthead" className="">
       <div className="main-inset pt-12 pb-8">
         <CmdPanel
           eyebrow={masthead.publisher}

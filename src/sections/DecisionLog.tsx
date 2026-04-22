@@ -142,7 +142,7 @@ export function DecisionLog() {
   const pctRated = Math.round((totalRated / decisions.length) * 100);
 
   return (
-    <TelemetryRegion id="decision-log" className="scroll-mt-24">
+    <TelemetryRegion id="decision-log" className="">
       <div className="main-inset py-8 flex flex-col gap-6">
         <CmdPanel
           eyebrow={decisionLogMeta.publisher}
@@ -329,7 +329,7 @@ function DecisionRow({
   return (
     <article
       id={d.id}
-      className={`grid grid-cols-[auto_auto_1fr_auto_auto] gap-4 items-center px-4 py-3 border-b border-white/5 scroll-mt-24 transition-colors ${
+      className={`grid grid-cols-[auto_auto_1fr_auto_auto] gap-4 items-center px-4 py-3 border-b border-white/5 transition-colors ${
         selected ? 'bg-[#f05122]/[0.06]' : 'hover:bg-white/[0.03]'
       }`}
     >

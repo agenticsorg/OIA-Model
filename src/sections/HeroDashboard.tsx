@@ -16,7 +16,7 @@ import { Chip } from '../components/Chip';
  */
 export function HeroDashboard() {
   return (
-    <TelemetryRegion id="hero-dashboard" className="scroll-mt-24">
+    <TelemetryRegion id="hero-dashboard" className="">
       <div className="main-inset pt-4 pb-10">
         <div className="mb-8 flex items-end justify-between gap-4 flex-wrap">
           <div>

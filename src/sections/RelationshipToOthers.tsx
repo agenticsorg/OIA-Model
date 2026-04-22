@@ -11,7 +11,7 @@ import {
 
 export function RelationshipToOthers() {
   return (
-    <TelemetryRegion id="relationship-to-others" className="scroll-mt-24">
+    <TelemetryRegion id="relationship-to-others" className="">
       <div className="main-inset py-8 flex flex-col gap-6">
         <CmdPanel
           eyebrow="Section 6"
@@ -26,7 +26,7 @@ export function RelationshipToOthers() {
             <CmdPanel
               key={r.id}
               id={r.id}
-              className="scroll-mt-24"
+              className=""
               eyebrow={r.shortName}
               title={r.name}
               trailing={<Chip tone="accent">Framework</Chip>}

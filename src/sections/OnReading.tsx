@@ -6,7 +6,7 @@ import { onReading } from '../content/digest';
 
 export function OnReading() {
   return (
-    <TelemetryRegion id="on-reading" className="scroll-mt-24">
+    <TelemetryRegion id="on-reading" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Preface"

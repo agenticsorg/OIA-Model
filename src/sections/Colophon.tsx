@@ -5,7 +5,7 @@ import { colophon } from '../content/digest';
 
 export function Colophon() {
   return (
-    <TelemetryRegion id="colophon" className="scroll-mt-24">
+    <TelemetryRegion id="colophon" className="">
       <div className="main-inset pt-8 pb-16">
         <CmdPanel eyebrow="End of Transmission" title="Colophon">
           <SweepLane compact />

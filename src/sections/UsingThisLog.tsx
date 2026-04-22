@@ -6,7 +6,7 @@ import { usingThisLog } from '../content/decision-log';
 
 export function UsingThisLog() {
   return (
-    <TelemetryRegion id="using-this-log" className="scroll-mt-24">
+    <TelemetryRegion id="using-this-log" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Decision Log Close"

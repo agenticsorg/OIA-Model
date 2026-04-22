@@ -10,7 +10,7 @@ import { foreword } from '../content/digest';
  */
 export function Foreword() {
   return (
-    <TelemetryRegion id="foreword" className="scroll-mt-24">
+    <TelemetryRegion id="foreword" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Foreword · Personal Register"

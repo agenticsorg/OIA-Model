@@ -6,7 +6,7 @@ import { nineLayersOverview } from '../content/digest';
 
 export function NineLayersOverview() {
   return (
-    <TelemetryRegion id="nine-layers-overview" className="scroll-mt-24">
+    <TelemetryRegion id="nine-layers-overview" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Section 3"

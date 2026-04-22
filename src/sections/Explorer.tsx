@@ -62,7 +62,7 @@ export function Explorer() {
   };
 
   return (
-    <TelemetryRegion id="explorer" className="scroll-mt-24">
+    <TelemetryRegion id="explorer" className="">
       <div className="main-inset py-8">
         <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
           <div>

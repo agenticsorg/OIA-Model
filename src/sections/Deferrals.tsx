@@ -6,7 +6,7 @@ import { deferrals } from '../content/digest';
 
 export function Deferrals() {
   return (
-    <TelemetryRegion id="deferrals" className="scroll-mt-24">
+    <TelemetryRegion id="deferrals" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Section 8"
@@ -20,7 +20,7 @@ export function Deferrals() {
               <article
                 key={d.id}
                 id={d.id}
-                className="bg-black rounded-xl border border-[#f05122]/30 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-5 flex flex-col gap-3 scroll-mt-24 relative overflow-hidden"
+                className="bg-black rounded-xl border border-[#f05122]/30 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-5 flex flex-col gap-3 relative overflow-hidden"
               >
                 <div
                   className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#f05122] to-transparent"

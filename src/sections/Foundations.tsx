@@ -6,7 +6,7 @@ import { foundations } from '../content/digest';
 
 export function Foundations() {
   return (
-    <TelemetryRegion id="foundations" className="scroll-mt-24">
+    <TelemetryRegion id="foundations" className="">
       <div className="main-inset py-8 flex flex-col gap-6">
         {/* §2.1 Lineage */}
         <CmdPanel id="foundations-lineage" eyebrow="Section 2.1" title={foundations.lineage.heading}>

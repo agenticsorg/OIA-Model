@@ -63,7 +63,7 @@ export function Assessment() {
   }
 
   return (
-    <TelemetryRegion id="assessment" className="scroll-mt-24">
+    <TelemetryRegion id="assessment" className="">
       <div className="main-inset py-8">
         <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
           <div>

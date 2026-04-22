@@ -6,7 +6,7 @@ import { introduction } from '../content/digest';
 
 export function Introduction() {
   return (
-    <TelemetryRegion id="introduction" className="scroll-mt-24">
+    <TelemetryRegion id="introduction" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Section 1"

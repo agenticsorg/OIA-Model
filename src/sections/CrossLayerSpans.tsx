@@ -50,7 +50,7 @@ function SpanLaneVisual({ span }: { span: Span }) {
 
 export function CrossLayerSpans() {
   return (
-    <TelemetryRegion id="cross-layer-spans" className="scroll-mt-24">
+    <TelemetryRegion id="cross-layer-spans" className="">
       <div className="main-inset py-8 flex flex-col gap-6">
         <CmdPanel
           eyebrow="Section 5"
@@ -84,7 +84,7 @@ export function CrossLayerSpans() {
             <CmdPanel
               key={s.id}
               id={s.id}
-              className="scroll-mt-24"
+              className=""
               eyebrow={s.code}
               title={s.name}
               trailing={

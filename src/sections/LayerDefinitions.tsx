@@ -11,7 +11,7 @@ function LayerPanel({ layer }: { layer: Layer }) {
   return (
     <CmdPanel
       id={layer.id}
-      className="scroll-mt-24"
+      className=""
       eyebrow={`Layer ${layer.number}`}
       title={layer.name}
       trailing={
@@ -103,7 +103,7 @@ function LayerPanel({ layer }: { layer: Layer }) {
 
 export function LayerDefinitions() {
   return (
-    <TelemetryRegion id="layer-definitions" className="scroll-mt-24">
+    <TelemetryRegion id="layer-definitions" className="">
       <div className="main-inset py-8">
         <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
           <div>

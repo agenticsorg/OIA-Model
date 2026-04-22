@@ -6,7 +6,7 @@ import { adoption } from '../content/digest';
 
 export function Adoption() {
   return (
-    <TelemetryRegion id="adoption" className="scroll-mt-24">
+    <TelemetryRegion id="adoption" className="">
       <div className="main-inset py-8">
         <CmdPanel
           eyebrow="Section 7"
