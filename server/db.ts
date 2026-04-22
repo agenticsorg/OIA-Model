@@ -11,7 +11,9 @@ import Database, { type Database as DatabaseType } from 'better-sqlite3';
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 
-const DB_PATH = resolve(process.cwd(), 'data', 'feedback.db');
+const DB_PATH = process.env.DB_PATH
+  ? resolve(process.env.DB_PATH)
+  : resolve(process.cwd(), 'data', 'feedback.db');
 
 let db: DatabaseType | null = null;
 

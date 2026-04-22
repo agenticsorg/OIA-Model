@@ -4,6 +4,7 @@ import { CmdPanel } from '../components/CmdPanel';
 import { Chip } from '../components/Chip';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { decisions } from '../content/decision-log';
+import { apiUrl } from '../lib/api-base';
 
 interface FormDraft {
   share_name: boolean;
@@ -178,7 +179,7 @@ export function Feedback() {
         ...draft,
         reopen_decisions: draft.reopen_decisions.join(', '),
       };
-      const r = await fetch('/api/feedback', {
+      const r = await fetch(apiUrl('/api/feedback'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

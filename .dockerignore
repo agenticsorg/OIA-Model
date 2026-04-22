@@ -1,0 +1,17 @@
+node_modules
+dist
+server-dist
+data
+.git
+.github
+.claude
+.claude-flow
+.mcp.json
+docs
+plans
+scripts
+animated-telemetry-dashboard-section*
+*.md
+!index.html
+*.log
+.env*

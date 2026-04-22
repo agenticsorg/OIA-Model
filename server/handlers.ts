@@ -6,9 +6,36 @@ import { insertFeedback, listFeedbackPublic, countFeedback, type FeedbackRow } f
  * the Vite middleware chain can stop; false to fall through to the
  * SPA.
  */
+/* CORS — allow the static SPA (GitHub Pages on oia.agentics.org or the
+   bare agenticsorg.github.io) and local dev to call the API. */
+const ALLOWED_ORIGINS = new Set([
+  'https://oia.agentics.org',
+  'https://agenticsorg.github.io',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+]);
+
+function applyCors(req: IncomingMessage, res: ServerResponse) {
+  const origin = req.headers.origin as string | undefined;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Max-Age', '600');
+  }
+}
+
 export async function handleApi(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
   const url = req.url ?? '';
   const method = req.method ?? 'GET';
+
+  applyCors(req, res);
+  if (method === 'OPTIONS') {
+    res.statusCode = 204;
+    res.end();
+    return true;
+  }
 
   if (method === 'POST' && url === '/feedback') {
     const body = await readJson(req);
