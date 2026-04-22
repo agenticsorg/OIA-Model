@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+*.tsbuildinfo
+
+# environment
+.env
+.env.local
+.env.*.local
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# logs
+*.log
+npm-debug.log*
+
+# Claude Code / agentics local state
+.claude/
+.claude-flow/
+.mcp.json

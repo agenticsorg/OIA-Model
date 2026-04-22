@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --surface: #060606;
+  --surface-2: #0c0c0c;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --ink: #ffffff;
+  --ink-2: rgba(255, 255, 255, 0.82);
+  --ink-3: rgba(255, 255, 255, 0.58);
+  --ink-4: rgba(255, 255, 255, 0.36);
+  --accent: #f05122;
+  --accent-2: #ff7a4a;
+  --accent-soft: rgba(240, 81, 34, 0.18);
+  --accent-softer: rgba(240, 81, 34, 0.08);
+  --accent-glow: 0 0 10px rgba(240, 81, 34, 0.55);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink-2);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* page-wide dotted grid overlay */
+.grid-dots {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=");
+  background-repeat: repeat;
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 8px;
+  border: 2px solid #000;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+/* telemetry panel width helpers — padding tuned to clear the fixed
+   left LayerRail (w-16 lg / w-52 xl) and right SpanRail (w-16). */
+.main-inset {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 90rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .main-inset { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+@media (min-width: 1024px) {
+  .main-inset { padding-left: 6rem; padding-right: 5rem; }
+}
+@media (min-width: 1280px) {
+  .main-inset { padding-left: 14rem; padding-right: 5rem; }
+}
