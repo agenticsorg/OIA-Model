@@ -15,6 +15,7 @@ const items: NavItem[] = [
   { id: 'explorer', label: 'Explorer' },
   { id: 'layer-definitions', label: 'Layers' },
   { id: 'decision-log', label: 'Decisions' },
+  { id: 'chat', label: 'Chat' },
   { id: 'feedback', label: 'Feedback' },
 ];
 

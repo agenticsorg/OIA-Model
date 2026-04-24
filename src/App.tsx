@@ -25,6 +25,7 @@ import { Closing } from './sections/Closing';
 import { DecisionLog } from './sections/DecisionLog';
 import { UsingThisLog } from './sections/UsingThisLog';
 import { Feedback } from './sections/Feedback';
+import { Chat } from './sections/Chat';
 import { Colophon } from './sections/Colophon';
 
 export default function App() {
@@ -79,6 +80,7 @@ export default function App() {
           <Closing />
           <DecisionLog />
           <UsingThisLog />
+          <Chat />
           <Feedback />
           <Colophon />
         </main>

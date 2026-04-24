@@ -44,6 +44,7 @@ export function CommandPalette({ open, onClose }: Props) {
       { id: 'decision-log', label: 'Decision Log Digest', hint: '11 decisions' },
       ...decisions.map((d) => ({ id: d.id, label: `Decision ${d.number} — ${d.title}`, hint: d.category })),
       { id: 'using-this-log', label: 'On Using This Log', hint: 'Decision Log close' },
+      { id: 'chat', label: 'Ask the OIA Model…', hint: 'Grounded Q&A' },
       { id: 'feedback', label: 'Feedback — submit to the Foundation', hint: 'SQLite · 16 questions' },
       { id: 'colophon', label: 'Colophon', hint: 'Bottom of page' },
     ],
@@ -105,7 +106,16 @@ export function CommandPalette({ open, onClose }: Props) {
               <li key={e.id}>
                 <a
                   href={`#${e.id}`}
-                  onClick={onClose}
+                  onClick={() => {
+                    onClose();
+                    if (e.id === 'chat') {
+                      // Let the Chat section's hashchange handler run first,
+                      // then request focus in the input.
+                      setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent('oia:chat:focus'));
+                      }, 60);
+                    }
+                  }}
                   className="flex items-center justify-between px-2 py-2 hover:bg-white/[0.04] rounded"
                 >
                   <span className="text-sm text-white/85 truncate">{e.label}</span>
