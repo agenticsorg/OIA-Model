@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { layers } from '../content/layers';
 import { spans } from '../content/spans';
 import { decisions } from '../content/decision-log';
+import { CHAT_ENABLED } from '../lib/chat-feature';
 
 interface Entry {
   id: string;
@@ -44,7 +45,9 @@ export function CommandPalette({ open, onClose }: Props) {
       { id: 'decision-log', label: 'Decision Log Digest', hint: '11 decisions' },
       ...decisions.map((d) => ({ id: d.id, label: `Decision ${d.number} — ${d.title}`, hint: d.category })),
       { id: 'using-this-log', label: 'On Using This Log', hint: 'Decision Log close' },
-      { id: 'chat', label: 'Ask the OIA Model…', hint: 'Grounded Q&A' },
+      ...(CHAT_ENABLED
+        ? [{ id: 'chat', label: 'Ask the OIA Model…', hint: 'Grounded Q&A' }]
+        : []),
       { id: 'feedback', label: 'Feedback — submit to the Foundation', hint: 'SQLite · 16 questions' },
       { id: 'colophon', label: 'Colophon', hint: 'Bottom of page' },
     ],

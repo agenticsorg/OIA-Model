@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { CHAT_ENABLED } from '../lib/chat-feature';
 
 interface NavItem {
   id: string;
@@ -15,7 +16,7 @@ const items: NavItem[] = [
   { id: 'explorer', label: 'Explorer' },
   { id: 'layer-definitions', label: 'Layers' },
   { id: 'decision-log', label: 'Decisions' },
-  { id: 'chat', label: 'Chat' },
+  ...(CHAT_ENABLED ? [{ id: 'chat', label: 'Chat' }] : []),
   { id: 'feedback', label: 'Feedback' },
 ];
 

@@ -18,6 +18,47 @@
  * budget_tokens:4096}` — ADR-0003 specifies Haiku 4.5, which still
  * accepts the manual-budget form. This is intentional; the migration
  * to adaptive thinking is a follow-up when the default model moves.
+ *
+ * --------------------------------------------------------------------
+ * HF Inference Providers swap path (ADR-0003 §2 reversal path 2, §4.3,
+ * §11). If the Foundation later prefers an open-weights model
+ * (SmolLM3-3B, Qwen2.5-7B-Instruct, etc.) the swap is roughly a
+ * ~20-line replacement of the body of streamChat(); the surrounding
+ * contract (signature, validateCitation, return shape, prompt
+ * structure stable-prefix-first) does not change. Concretely:
+ *
+ *   1. Replace `import Anthropic from '@anthropic-ai/sdk'` with a
+ *      thin OpenAI-compatible fetch client. HF Inference Providers
+ *      exposes `https://router.huggingface.co/v1/chat/completions`
+ *      with the standard OpenAI Chat Completions schema.
+ *   2. Use `Authorization: Bearer ${process.env.HF_TOKEN}` (the secret
+ *      is provisioned in Secret Manager as `hf-inference-token`,
+ *      matching ADR-0003 §5).
+ *   3. Replace tool_choice with OpenAI-style structured output:
+ *        response_format: {
+ *          type: 'json_schema',
+ *          json_schema: { name: 'answer', schema: ANSWER_TOOL.input_schema, strict: true }
+ *        }
+ *      The ANSWER_TOOL.input_schema in chat-schema.ts is reusable
+ *      verbatim; only the wrapper changes.
+ *   4. Replace the Anthropic-cached system+digest block with a single
+ *      system message containing the same content. HF backends do not
+ *      expose a portable cache_control primitive — some perform
+ *      opportunistic KV-cache reuse on stable prefixes, but it is not
+ *      contractual. Keep the prompt stable-prefix-first regardless.
+ *   5. Stream by setting `stream: true` and reading SSE `data:` lines;
+ *      OpenAI deltas arrive at `choices[0].delta.content`. Feed the
+ *      progressive JSON through extractPartialAnswerField() unchanged.
+ *   6. The `usage` block from HF backends often omits cache token
+ *      counts; spend-tracker.ts's pricing fall-through already logs a
+ *      warning and uses Haiku rates as a floor. Add an HF row to the
+ *      pricing table to make spend reporting accurate.
+ *
+ * Selection between Anthropic and HF is a function of OIA_CHAT_MODEL:
+ * model strings starting with `claude-` route to Anthropic; everything
+ * else (`HuggingFaceTB/SmolLM3-3B`, `Qwen/Qwen2.5-7B-Instruct`, …)
+ * routes to HF. This branch lives at the top of streamChat() and is
+ * the only structural change needed beyond the bullets above.
  */
 
 import Anthropic from '@anthropic-ai/sdk';

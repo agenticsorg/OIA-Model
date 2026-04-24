@@ -27,6 +27,7 @@ import { UsingThisLog } from './sections/UsingThisLog';
 import { Feedback } from './sections/Feedback';
 import { Chat } from './sections/Chat';
 import { Colophon } from './sections/Colophon';
+import { CHAT_ENABLED } from './lib/chat-feature';
 
 export default function App() {
   const [paletteOpen, setPaletteOpen] = useState(false);
@@ -80,7 +81,7 @@ export default function App() {
           <Closing />
           <DecisionLog />
           <UsingThisLog />
-          <Chat />
+          {CHAT_ENABLED && <Chat />}
           <Feedback />
           <Colophon />
         </main>
