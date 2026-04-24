@@ -12,6 +12,8 @@ COPY vite.config.ts tailwind.config.js postcss.config.js index.html ./
 COPY src ./src
 COPY public ./public
 COPY server ./server
+COPY scripts ./scripts
+COPY docs ./docs
 
 # Vite build (dist/)
 RUN npm run build

@@ -7,11 +7,8 @@ data
 .claude
 .claude-flow
 .mcp.json
-docs
+.swarm
 plans
-scripts
 animated-telemetry-dashboard-section*
-*.md
-!index.html
 *.log
 .env*
