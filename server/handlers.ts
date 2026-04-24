@@ -91,7 +91,7 @@ export async function handleApi(req: IncomingMessage, res: ServerResponse): Prom
 const INJECTION_PATTERNS = [/ignore\s+previous\s+instructions/i, /you\s+are\s+now\s+DAN/i];
 const MAX_USER_TURN_CHARS = 4096;
 const MAX_TURNS_PER_THREAD = 40; // ADR-0003 §6
-const FEEDBACK_ROW_LIMIT = parseInt(process.env.OIA_CHAT_FEEDBACK_LIMIT || '100', 10);
+const FEEDBACK_ROW_LIMIT = parseInt(process.env.OIA_CHAT_FEEDBACK_LIMIT || '300', 10);
 
 interface ChatRequestBody {
   messages?: Array<{ role?: string; content?: string }>;

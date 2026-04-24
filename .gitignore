@@ -27,3 +27,7 @@ data/
 .claude/
 .claude-flow/
 .mcp.json
+.swarm/
+
+# server build output
+server-dist/
