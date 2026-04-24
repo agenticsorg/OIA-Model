@@ -11,5 +11,15 @@
     "declaration": false,
     "sourceMap": false
   },
-  "include": ["server/db.ts", "server/handlers.ts", "server/index.ts"]
+  "include": [
+    "server/db.ts",
+    "server/handlers.ts",
+    "server/index.ts",
+    "server/pii-heuristic.ts",
+    "server/corpus.ts",
+    "server/chat-schema.ts",
+    "server/chat-client.ts",
+    "server/rate-limit.ts",
+    "server/spend-tracker.ts"
+  ]
 }

@@ -5,17 +5,19 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:corpus": "node scripts/build-corpus.mjs",
+    "build": "npm run build:corpus && tsc -b && vite build",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
     "test": "echo \"(tests not yet authored; see plans/ADR-0001-oia-model-reader-ui.md §11 Phase 9)\" && exit 0",
     "feedback:list": "node scripts/feedback-list.mjs",
     "feedback:full": "node scripts/feedback-list.mjs --full",
     "feedback:query": "node scripts/feedback-query.mjs",
-    "server:build": "tsc -p tsconfig.server.json && printf '{\"type\":\"commonjs\"}\\n' > server-dist/package.json",
+    "server:build": "npm run build:corpus && tsc -p tsconfig.server.json && printf '{\"type\":\"commonjs\"}\\n' > server-dist/package.json",
     "server:start": "node server-dist/index.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.91.0",
     "better-sqlite3": "^12.9.0",
     "express": "^5.2.1",
     "lucide-react": "^0.441.0",
