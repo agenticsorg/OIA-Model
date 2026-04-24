@@ -8,6 +8,7 @@ import { apiUrl } from '../lib/api-base';
 
 interface FormDraft {
   share_name: boolean;
+  share_body: boolean;
   name: string;
   email: string;
   organization: string;
@@ -35,6 +36,7 @@ interface FormDraft {
 
 const INITIAL: FormDraft = {
   share_name: false,
+  share_body: false,
   name: '',
   email: '',
   organization: '',
@@ -157,7 +159,12 @@ const REVIEW_QUESTIONS: {
 export function Feedback() {
   const [draft, setDraft] = useLocalStorage<FormDraft>('oia:feedback:draft:v2', INITIAL);
   const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<null | { ok: true; id: number } | { ok: false; error: string }>(null);
+  const [status, setStatus] = useState<
+    | null
+    | { ok: true; id: number; advisory?: string; findings?: string[] }
+    | { ok: false; error: string }
+  >(null);
+  const [piiDialog, setPiiDialog] = useState<null | { id: number; findings: string[] }>(null);
 
   function patch<K extends keyof FormDraft>(key: K, value: FormDraft[K]) {
     setDraft({ ...draft, [key]: value });
@@ -186,7 +193,10 @@ export function Feedback() {
       });
       const data = await r.json();
       if (!r.ok || !data.ok) throw new Error(data.error ?? 'Submission failed');
-      setStatus({ ok: true, id: data.id });
+      setStatus({ ok: true, id: data.id, advisory: data.advisory, findings: data.findings });
+      if (Array.isArray(data.findings) && data.findings.length > 0) {
+        setPiiDialog({ id: data.id, findings: data.findings });
+      }
       setDraft(INITIAL);
     } catch (e) {
       setStatus({ ok: false, error: (e as Error).message });
@@ -211,9 +221,11 @@ export function Feedback() {
             </h2>
             <p className="mt-2 text-sm text-white/60 max-w-2xl leading-relaxed">
               Push back, propose improvements, or contribute experience to any Open Question.
-              Answer the questions that apply — you can skip the rest. Sharing your name is
-              optional; submissions are stored in a local SQLite database and are never
-              published without your consent.
+              Answer the questions that apply — you can skip the rest. Submissions are stored
+              in SQLite. Your identity and your response content are{' '}
+              <strong className="text-white/80">published only with your explicit consent</strong>
+              {' '}— use the two checkboxes below. Without your consent, your submission is
+              visible only to the Foundation and will not appear in public listings or in the Chat.
             </p>
           </div>
           <Chip tone="accent">{filled} field{filled === 1 ? '' : 's'} filled</Chip>
@@ -285,6 +297,41 @@ export function Feedback() {
                 <strong className="text-white">I consent to my name being shared publicly</strong> with this feedback. Leave this
                 unchecked to remain anonymous — your name and organisation will still be stored for
                 the Foundation's internal follow-up but redacted from any public listing.
+              </span>
+            </label>
+            <label className="mt-3 flex items-start gap-3 cursor-pointer group">
+              <span
+                className={`w-4 h-4 mt-0.5 rounded border flex items-center justify-center flex-shrink-0 ${
+                  draft.share_body
+                    ? 'bg-[#f05122] border-[#f05122] shadow-[0_0_8px_rgba(240,81,34,0.45)]'
+                    : 'bg-black border-white/20 group-hover:border-white/45'
+                }`}
+                aria-hidden="true"
+              >
+                {draft.share_body && (
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                )}
+              </span>
+              <input
+                type="checkbox"
+                checked={draft.share_body}
+                onChange={(e) => patch('share_body', e.target.checked)}
+                className="sr-only"
+              />
+              <span className="text-sm text-white/85">
+                <strong className="text-white">I consent to my response content being published.</strong>{' '}
+                My response bodies (the answers below) may be used by the Foundation to build publicly
+                queryable tools, including the OIA Model Chat. You can withdraw this consent by emailing
+                the Foundation — we will redact or delete your submission.
+                {draft.share_body && (
+                  <span className="block mt-1 text-[0.75rem] text-[#ff8a5c]">
+                    Heads-up: your responses may appear publicly in the Chat. Please don't include
+                    information about third parties (colleagues, clients, unpublished vendors) without
+                    their permission.
+                  </span>
+                )}
               </span>
             </label>
           </CmdPanel>
@@ -418,13 +465,66 @@ export function Feedback() {
 
         <p className="mt-6 text-[0.75rem] text-white/45 leading-relaxed max-w-3xl">
           <span className="text-[#ff8a5c] font-mono tracking-[0.18em] uppercase mr-1">Storage</span>
-          Submissions are stored in <code className="text-white/80">data/feedback.db</code> (SQLite). The
-          Foundation can query directly via <code className="text-white/80">npm run feedback:list</code> or{' '}
-          <code className="text-white/80">npm run feedback:query -- "SELECT …"</code>.
+          Submissions are stored in <code className="text-white/80">data/feedback.db</code> (SQLite).
+          The Foundation always retains internal access via{' '}
+          <code className="text-white/80">npm run feedback:list</code> and{' '}
+          <code className="text-white/80">npm run feedback:query -- "SELECT …"</code>. Rows where you
+          check <strong className="text-white/70">I consent to my response content being published</strong>{' '}
+          additionally become eligible for retrieval by the OIA Model Chat; all other rows remain
+          Foundation-internal. You can withdraw body-publication consent at any time by emailing the
+          Foundation, or by running{' '}
+          <code className="text-white/80">scripts/feedback-redact.mjs &lt;id&gt;</code> against your
+          submission id.
         </p>
+
+        {piiDialog && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            onClick={() => setPiiDialog(null)}
+          >
+            <div
+              className="max-w-lg w-full bg-black border border-[#f05122]/50 rounded-lg p-6 shadow-[0_0_30px_rgba(240,81,34,0.35)]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="text-[0.6875rem] font-mono text-[#ff8a5c] tracking-[0.18em] uppercase mb-2">
+                Possible PII detected
+              </div>
+              <p className="text-sm text-white/85 leading-relaxed">
+                We noticed something that looks like{' '}
+                <strong className="text-white">{firstFindingSummary(piiDialog.findings)}</strong> in
+                your response. Submission #{piiDialog.id} has been recorded. If you'd like to withdraw
+                this submission or resubmit with that redacted, email the Foundation or run{' '}
+                <code className="text-white/80">scripts/feedback-redact.mjs {piiDialog.id}</code>.
+              </p>
+              <p className="mt-3 text-[0.75rem] text-white/50 leading-relaxed">
+                This is a heuristic and may false-positive. If the match is harmless (e.g. a URL, an
+                ORCID, an example address), you can ignore this notice.
+              </p>
+              <div className="mt-4 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setPiiDialog(null)}
+                  className="px-3 py-1.5 bg-[#f05122] hover:bg-[#ff7a4a] text-white text-sm rounded"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </TelemetryRegion>
   );
+}
+
+function firstFindingSummary(findings: string[]): string {
+  const f = findings[0] ?? 'possible PII';
+  if (f.startsWith('email')) return 'an email address';
+  if (f.startsWith('phone')) return 'a phone number';
+  if (f.startsWith('bearer-token')) return 'a long token-like string';
+  return f;
 }
 
 function QuestionField({
@@ -496,7 +596,7 @@ function LabeledInput({
 function countFilled(d: FormDraft): number {
   let n = 0;
   for (const [k, v] of Object.entries(d)) {
-    if (k === 'share_name') continue;
+    if (k === 'share_name' || k === 'share_body') continue;
     if (Array.isArray(v)) { if (v.length) n += 1; continue; }
     if (typeof v === 'string' && v.trim()) n += 1;
   }

@@ -27,8 +27,9 @@ export function getDb(): DatabaseType {
       id                  INTEGER PRIMARY KEY AUTOINCREMENT,
       created_at          TEXT NOT NULL DEFAULT (datetime('now')),
 
-      -- identity (all optional; share_name controls whether name is shown publicly)
+      -- identity & consent (ADR-0004 two-dimensional consent model)
       share_name          INTEGER NOT NULL DEFAULT 0,
+      share_body          INTEGER NOT NULL DEFAULT 0,
       name                TEXT,
       email               TEXT,
       organization        TEXT,
@@ -71,6 +72,23 @@ export function getDb(): DatabaseType {
   ensure('legacy_vendor_mapping');
   ensure('foundation_funding');
   ensure('regulatory_alignment');
+  /* ADR-0004: `share_body` is INTEGER NOT NULL DEFAULT 0, not TEXT. SQLite's
+     ALTER TABLE allows adding a NOT NULL column only when a default exists,
+     which DEFAULT 0 satisfies — existing rows land in the safe (non-publish)
+     state automatically. */
+  if (!have.has('share_body')) {
+    instance.exec('ALTER TABLE feedback ADD COLUMN share_body INTEGER NOT NULL DEFAULT 0');
+  }
+  /* ADR-0003 §6 — daily chat spend accounting. One row per UTC date.
+     `spent_microusd` is the integer micro-dollar total (1e-6 USD) so we
+     don't drift with float accumulation across hundreds of turns. */
+  instance.exec(`
+    CREATE TABLE IF NOT EXISTS chat_usage (
+      date_utc      TEXT    PRIMARY KEY,
+      spent_microusd INTEGER NOT NULL DEFAULT 0,
+      turn_count    INTEGER NOT NULL DEFAULT 0
+    );
+  `);
   return db;
 }
 
@@ -78,6 +96,7 @@ export interface FeedbackRow {
   id?: number;
   created_at?: string;
   share_name: 0 | 1;
+  share_body: 0 | 1;
   name: string | null;
   email: string | null;
   organization: string | null;
@@ -104,7 +123,7 @@ export interface FeedbackRow {
 export function insertFeedback(row: FeedbackRow): number {
   const stmt = getDb().prepare(`
     INSERT INTO feedback (
-      share_name, name, email, organization, role,
+      share_name, share_body, name, email, organization, role,
       hyperscaler_monopolies, layer8_certification, legacy_vendor_mapping,
       foundation_funding, regulatory_alignment,
       shape_response, reopen_decisions, reopen_reasons,
@@ -112,7 +131,7 @@ export function insertFeedback(row: FeedbackRow): number {
       missing_concerns, missing_tech, missing_spans,
       vertical_extension, improvements, general_feedback
     ) VALUES (
-      @share_name, @name, @email, @organization, @role,
+      @share_name, @share_body, @name, @email, @organization, @role,
       @hyperscaler_monopolies, @layer8_certification, @legacy_vendor_mapping,
       @foundation_funding, @regulatory_alignment,
       @shape_response, @reopen_decisions, @reopen_reasons,

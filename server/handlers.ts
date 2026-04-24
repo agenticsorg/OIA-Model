@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { insertFeedback, listFeedbackPublic, countFeedback, type FeedbackRow } from './db';
+import { detectPii } from './pii-heuristic';
 
 /**
  * Handles /api/* routes. Returns true if the request was handled so
@@ -41,7 +42,17 @@ export async function handleApi(req: IncomingMessage, res: ServerResponse): Prom
     const body = await readJson(req);
     const row = normaliseFeedback(body);
     const id = insertFeedback(row);
-    send(res, 200, { ok: true, id });
+    const findings = detectPii(row);
+    if (findings.length > 0) {
+      send(res, 200, {
+        ok: true,
+        id,
+        advisory: 'possible PII detected in body fields — review stored submission',
+        findings,
+      });
+    } else {
+      send(res, 200, { ok: true, id });
+    }
     return true;
   }
 
@@ -85,6 +96,7 @@ function s(v: unknown): string | null {
 function normaliseFeedback(body: Record<string, unknown>): FeedbackRow {
   return {
     share_name: body.share_name === true || body.share_name === 1 ? 1 : 0,
+    share_body: body.share_body === true || body.share_body === 1 ? 1 : 0,
     name: s(body.name),
     email: s(body.email),
     organization: s(body.organization),
