@@ -1,6 +1,10 @@
 /**
  * Horizontal 2026 timeline marking the three contemporary-context
  * developments from §2.2 of the digest.
+ *
+ * Layout: a thin year track on top, with one tick per event positioned
+ * along it; the cards themselves sit in a 3-column grid beneath the
+ * track so they can never overlap regardless of viewport width.
  */
 
 const EVENTS = [
@@ -38,60 +42,65 @@ export function ContextTimeline() {
       </figcaption>
 
       <div className="bg-black rounded-xl border border-white/10 shadow-[inset_0_2px_10px_rgba(0,0,0,0.8)] p-6 overflow-hidden">
+        {/* Year track */}
         <div className="relative">
-          {/* track */}
           <div className="h-px w-full bg-gradient-to-r from-white/10 via-white/30 to-[#f05122]" />
 
-          {/* month ticks */}
+          {/* Event ticks on the track */}
+          <div className="relative h-3 -mt-[5px]">
+            {EVENTS.map((e, i) => (
+              <span
+                key={i}
+                className={`absolute -top-[1px] w-2.5 h-2.5 -ml-[5px] rounded-full ${
+                  e.emphasized
+                    ? 'bg-[#f05122] shadow-[0_0_12px_rgba(240,81,34,0.7)] pulse-accent'
+                    : 'bg-white/60'
+                }`}
+                style={{ left: `${e.pos}%` }}
+                aria-hidden="true"
+              />
+            ))}
+          </div>
+
+          {/* Year labels */}
           <div className="mt-2 flex items-center justify-between text-[0.625rem] font-mono text-white/35 tracking-[0.18em] uppercase">
             <span>2024</span>
             <span>2025</span>
             <span className="text-[#ff8a5c]">2026 · NOW</span>
             <span>2027 →</span>
           </div>
+        </div>
 
-          {/* event pins */}
-          <div className="relative mt-6 h-[360px] sm:h-[280px]">
-            {EVENTS.map((e, i) => (
-              <div
-                key={i}
-                className="absolute top-0 w-64 max-w-[70%]"
-                style={{ left: `calc(${e.pos}% - 6rem)` }}
-              >
-                {/* drop line */}
-                <div className="mx-auto w-px h-6 bg-gradient-to-b from-transparent to-[#f05122]" />
-                {/* marker */}
-                <div className="flex justify-center">
-                  <span
-                    className={`w-2.5 h-2.5 rounded-full ${
-                      e.emphasized ? 'bg-[#f05122] shadow-[0_0_12px_rgba(240,81,34,0.7)] pulse-accent' : 'bg-white/60'
-                    }`}
-                    aria-hidden="true"
-                  />
-                </div>
-                {/* card */}
-                <div
-                  className={`mt-3 p-3 rounded-lg border ${
-                    e.emphasized
-                      ? 'border-[#f05122]/60 bg-[#f05122]/10'
-                      : 'border-white/10 bg-white/[0.02]'
+        {/* Event cards — fixed 3-column grid, never overlap */}
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+          {EVENTS.map((e, i) => (
+            <article
+              key={i}
+              className={`p-3.5 rounded-lg border flex flex-col gap-1.5 ${
+                e.emphasized
+                  ? 'border-[#f05122]/60 bg-[#f05122]/10 shadow-[0_0_24px_rgba(240,81,34,0.12)]'
+                  : 'border-white/10 bg-white/[0.02]'
+              }`}
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span
+                  className={`text-[0.625rem] font-mono tracking-[0.18em] uppercase ${
+                    e.emphasized ? 'text-[#ff8a5c]' : 'text-white/45'
                   }`}
                 >
-                  <div
-                    className={`text-[0.625rem] font-mono tracking-[0.18em] uppercase ${
-                      e.emphasized ? 'text-[#ff8a5c]' : 'text-white/45'
-                    }`}
-                  >
-                    {e.month}
-                  </div>
-                  <div className="text-sm text-white mt-1">{e.title}</div>
-                  <div className="text-[0.75rem] text-white/60 leading-relaxed mt-1">
-                    {e.subtitle}
-                  </div>
-                </div>
+                  {e.month}
+                </span>
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${
+                    e.emphasized ? 'bg-[#f05122]' : 'bg-white/40'
+                  }`}
+                  aria-hidden="true"
+                />
               </div>
-            ))}
-          </div>
+              <div className="text-sm text-white leading-snug">{e.title}</div>
+              <div className="text-[0.75rem] text-white/60 leading-relaxed">{e.subtitle}</div>
+            </article>
+          ))}
         </div>
       </div>
     </figure>

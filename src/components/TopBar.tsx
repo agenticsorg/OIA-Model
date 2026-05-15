@@ -7,13 +7,15 @@ interface NavItem {
 
 const items: NavItem[] = [
   { id: 'masthead', label: 'Digest' },
+  { id: 'about', label: 'About' },
+  { id: 'foreword', label: 'Foreword' },
+  { id: 'layer-definitions', label: 'Layers' },
+  { id: 'tools-intro', label: 'Tools' },
   { id: 'workspace', label: 'Workspace' },
   { id: 'stack-diagram', label: 'Stack' },
   { id: 'assessment', label: 'Assess' },
   { id: 'provider-footprint', label: 'Vendors' },
   { id: 'implementation', label: 'Roadmap' },
-  { id: 'explorer', label: 'Explorer' },
-  { id: 'layer-definitions', label: 'Layers' },
   { id: 'decision-log', label: 'Decisions' },
   { id: 'feedback', label: 'Feedback' },
 ];

@@ -5,6 +5,8 @@ import { SpanRail } from './components/SpanRail';
 import { CommandPalette } from './components/CommandPalette';
 import { Masthead } from './sections/Masthead';
 import { HeroDashboard } from './sections/HeroDashboard';
+import { About } from './sections/About';
+import { ToolsIntro } from './sections/ToolsIntro';
 import { Workspace } from './sections/Workspace';
 import { Assessment } from './sections/Assessment';
 import { StackDiagram } from './sections/StackDiagram';
@@ -58,14 +60,11 @@ export default function App() {
         <LayerRail />
         <SpanRail />
         <main>
+          {/* — Masthead & framing — */}
           <Masthead />
-          <HeroDashboard />
-          <Workspace />
-          <StackDiagram />
-          <Assessment />
-          <ProviderFootprint />
-          <Implementation />
-          <Explorer />
+          <About />
+
+          {/* — Part I · Written content of the digest — */}
           <OnReading />
           <Foreword />
           <Introduction />
@@ -77,6 +76,16 @@ export default function App() {
           <Adoption />
           <Deferrals />
           <Closing />
+
+          {/* — Part II · Potential tools (proposed implementations) — */}
+          <ToolsIntro />
+          <HeroDashboard />
+          <Workspace />
+          <StackDiagram />
+          <Assessment />
+          <ProviderFootprint />
+          <Implementation />
+          <Explorer />
           <DecisionLog />
           <UsingThisLog />
           <Feedback />
