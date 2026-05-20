@@ -23,6 +23,9 @@ npm-debug.log*
 # runtime data
 data/
 
+# local-only dumps of production feedback (contains submitter PII)
+docs/feedback-submissions.md
+
 # Claude Code / agentics local state
 .claude/
 .claude-flow/

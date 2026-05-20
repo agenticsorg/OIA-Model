@@ -4,6 +4,7 @@ import { LayerRail } from './components/LayerRail';
 import { SpanRail } from './components/SpanRail';
 import { CommandPalette } from './components/CommandPalette';
 import { Masthead } from './sections/Masthead';
+import { AtAGlance } from './sections/AtAGlance';
 import { HeroDashboard } from './sections/HeroDashboard';
 import { About } from './sections/About';
 import { ToolsIntro } from './sections/ToolsIntro';
@@ -62,6 +63,7 @@ export default function App() {
         <main>
           {/* — Masthead & framing — */}
           <Masthead />
+          <AtAGlance />
           <About />
 
           {/* — Part I · Written content of the digest — */}
